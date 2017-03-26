@@ -1,0 +1,20 @@
+#!/usr/bin/env node
+
+const lib = require('../')
+
+const argv = require('yargs')
+  .usage('Usage: $0 [options]')
+  .boolean('s')
+  .alias('s', 'start')
+  .describe('s', 'Start IPFS swarm')
+  .describe('r', 'Local IPFS repo path')
+  .example('$0 -r ~/.ipfs', 'Use IPFS repo created by go-ipfs')
+  .alias('r', 'repo')
+  .alias('p', 'port')
+  .describe('p', 'IPFS file borwser\'s port')
+  .default('p', 8989)
+  .help('h')
+  .alias('h', 'help')
+  .argv
+
+lib(argv.start, argv.port, argv.repo)

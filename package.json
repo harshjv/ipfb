@@ -1,6 +1,6 @@
 {
   "name": "ipfb",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Interplanetary File Browser",
   "main": "index.js",
   "scripts": {
@@ -28,6 +28,7 @@
     "ipfs": "^0.23.0",
     "mime-types": "^2.1.15",
     "multihashes": "^0.4.5",
-    "promised-for": "^1.0.0"
+    "promised-for": "^1.0.0",
+    "yargs": "^7.0.2"
   }
 }

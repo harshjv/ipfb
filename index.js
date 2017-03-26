@@ -4,23 +4,23 @@ const path = require('path')
 const IPFS = require('ipfs')
 const express = require('express')
 
-const resolve = require('./resolve')
-
-const node = new IPFS({ init: false })
+const serve = require('./serve')
 const views = path.join(__dirname, 'views')
 
-node.on('start', () => {
-  const app = express()
-  app.set('view engine', 'hbs')
-  app.set('views', views)
-  app.use('/assets', express.static(path.join('.', 'assets')))
+const app = express()
+app.set('view engine', 'hbs')
+app.set('views', views)
+app.use('/assets', express.static(path.join('.', 'assets')))
+
+module.exports = (start, port, repo) => {
+  const node = new IPFS({ init: false, start, repo })
 
   app.get('/ipfs/*', (req, res) => {
     const reqPath = url.parse(req.originalUrl).pathname
-    resolve(node, reqPath, res)
+    serve(node, reqPath, res)
   })
 
-  app.listen(8005, () => {
-    console.log('Started listening on port 8005')
+  app.listen(port, () => {
+    console.log(`ipfb running on port ${port}`)
   })
-})
+}
